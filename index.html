@@ -1,108 +1,462 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GL Bajaj Institute of Management</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio | Kalash srivastva</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ff88;
+            --secondary: #03c588;
+            --dark: #121212;
+            --light: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s forwards;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s 0.2s forwards;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--primary);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s 0.4s forwards;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Particles Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #08001f, #30197d);
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 100px 50px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        /* Skills Section */
+        .skills {
+            padding: 100px 50px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .skill-icon {
+            font-size: 2.5em;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 100px 50px;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            border-radius: 5px;
+            color: var(--light);
+            font-size: 1em;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            animation: fadeUp 0.8s forwards;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--dark);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            .projects, .skills, .contact {
+                padding: 80px 20px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <header>
-    <div class="container header-flex">
-      <a href="#home" class="logo">
-        <img src="https://www.glbitm.org/images/logo.png" alt="GL Bajaj Logo">
-        <span></span>
-      </a>
-      <nav>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#courses">Courses</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#admission">Admission</a></li>
-          <li><a href="#contact">Contact</a></li>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">KS</a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
-      </nav>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div id="particles-js"></div>
+        <div class="hero-content">
+            <h1>Kalash Srivastava</h1>
+            <p>Full Stack Developer & UI Designer</p>
+            <a href="#contact" class="cta-btn">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="Screenshot 2025-04-12 153134.jpg" class="project-image" alt="Project">
+                <h3>spotify clone </h3>
+                <p></p>
+            </div>
+            <div class="project-card">
+                <img src="https://source.unsplash.com/random/800x600?app" class="project-image" alt="Project">
+                <h3></h3>
+                <p></p>
+            </div>
+            <div class="project-card">
+                <img src="https://source.unsplash.com/random/800x600?dashboard" class="project-image" alt="Project">
+                <h3></h3>
+                <p></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-item">
+                <i class="fab fa-react skill-icon"></i>
+                <h3>Frontend Development</h3>
+                <p></p>
+            </div>
+            <div class="skill-item">
+                <i class="fas fa-server skill-icon"></i>
+                <h3>Backend Development</h3>
+                <p></p>
+            </div>
+            <div class="skill-item">
+                <i class="fas fa-palette skill-icon"></i>
+                <h3>UI/UX Design</h3>
+                <p></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="cta-btn">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Social Links -->
+    <div class="social-links">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
     </div>
-  </header>
 
-  <section id="home" class="hero">
-    <div class="container">
-      <h2>Welcome to GL Bajaj Institute of Management</h2>
-      <p>Empowering Future Leaders</p>
-    </div>
-  </section>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js initialization
+        particlesJS('particles-js', {
+            particles: {
+                number: { value: 80 },
+                color: { value: '#00ff88' },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5 },
+                size: { value: 3 },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false,
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
 
-  <section id="about">
-    <div class="container">
-      <h2>About Us</h2>
-      <p>Welcome to GL Bajaj Institute of Management, Greater Noida
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, { threshold: 0.1 });
 
-        Driven by a strong inclination towards imparting quality education, GL Bajaj Institute of Management, Greater Noida is one of the finest Educational Institute in the Greater Noida/Delhi-NCR region. Since the establishment of GL Bajaj Group, our skilled faculty share their knowledge with their students in the best possible way to find solutions to their complex issues and problems. Since its establishment in the year 1997, GL Bajaj Group has embraced quality and innovation favourable for the overall development of its students. Continuing on its path of growth, GL Bajaj Group experienced the greatest period of success in its history with 12 campuses located in NCR and Mathura.
-        
-        GL Bajaj Group has been successfully building strong professionals in the field of Management, Technology, Education, Dental Science, Engineering, Pharmacy and Library Sciences. Thanks to Mr. Pankaj Agrawal, Vice Chairman, GL Bajaj Educational Institutions, whose selfless work has won laurels for the GL Bajaj Group at various platforms.
-        
-        GL Bajaj Institute of Management, Greater Noida is one of the prestigious Institutions under the GL Bajaj Group offering Bachelor of Business Administration (BBA) and Bachelor of Computer Application (BCA). The Institute is affiliated to Chaudhary Charan Singh University (CCS), Meerut.</p>
-    </div>
-  </section>
+        document.querySelectorAll('.section-title, .project-card, .skill-item').forEach(el => {
+            observer.observe(el);
+        });
 
-  <section id="courses">
-    <div class="container">
-      <h2>Our Courses</h2>
-      <ul class="course-list">
-        <li>BCA (Bachelor of Computer Application)</li>
-        <li>BBA (Bachelor of Business Administration)</li>
-      </ul>
-    </div>
-  </section>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
 
-  <section id="gallery">
-    <div class="container">
-      <h2>Campus Gallery</h2>
-      <div class="gallery">
-        <img src="https://images.shiksha.com/mediadata/images/1507374080php7Y15dy.jpeg" alt="Campus 1">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/G.L._Bajaj_Institute_of_Technology_and_Management%2C_Greater_Noida.jpg/2560px-G.L._Bajaj_Institute_of_Technology_and_Management%2C_Greater_Noida.jpg" alt="Campus 2">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw_wPkPW2JrvOGmUgbhmZaMmb1emERbnjR4Q&s" alt="Classroom">
-        <img src="https://www.glbitm.org/library/img/aboutlibrary23.webp" alt="Library">
-      </div>
-    </div>
-  </section>
-
-  
-
-  <section id="admission">
-    <div class="container">
-      <h2>Admission Form</h2>
-      <form class="admission-form">
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email Address" required>
-        <input type="tel" placeholder="Phone Number" required>
-        <select required>
-          <option value="">Select Course</option>
-          <option value="BCA">BCA</option>
-          <option value="BBA">BBA</option>
-          
-        </select>
-        <textarea placeholder="Why do you want to join us?" rows="4" required></textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container">
-      <h2>Contact Us</h2>
-      <p>Email: info@glbajajimr.org</p>
-      <p>Phone: +91-1234567890</p>
-      <p>Address: GL Bajaj Institute of Management, Greater Noida, Uttar Pradesh</p>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 GL Bajaj Institute of Management. All rights reserved.</p>
-    </div>
-  </footer>
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            e.target.reset();
+        });
+    </script>
 </body>
 </html>
